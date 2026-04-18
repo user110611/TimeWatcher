@@ -1,0 +1,28 @@
+name: TimeWatcher
+version: 1.0
+main: mc.clanmine.timeWatcher.TimeWatcher
+api-version: "1.21"
+description: Отслеживатель времени для ClanMine
+author: user110611
+commands:
+  mystats:
+    description: Показать статистику
+    usage: /mystats
+  mystatsmode:
+    description: Переключить режим отображения
+    usage: /mystatsmode <chat|menu>
+  link:
+    description: Привязать Discord аккаунт
+    usage: /link bot
+  resetall:
+    description: Сбросить статистику игрока
+    usage: /resetall <ник>
+    permission: timewatcher.admin
+  statsbot:
+    description: Управление плагином
+    usage: /statsbot reload
+    permission: timewatcher.admin
+permissions:
+  timewatcher.admin:
+    description: Доступ к админ командам
+    default: op
