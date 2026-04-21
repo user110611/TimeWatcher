@@ -22,6 +22,13 @@ commands:
     description: Управление плагином
     usage: /statsbot reload
     permission: timewatcher.admin
+  tokens:
+    description: Управление токенами игрока
+    usage: /tokens <ник> <add|remove|set> <количество>
+    permission: timewatcher.admin
+  mytimer:
+    description: Время до следующего токена
+    usage: /mytimer
 permissions:
   timewatcher.admin:
     description: Доступ к админ командам

@@ -21,6 +21,8 @@ public class TimeWatcher extends JavaPlugin {
         getCommand("link").setExecutor(new LinkCommand(timeManager));
         getCommand("resetall").setExecutor(new ResetAllCommand(timeManager));
         getCommand("statsbot").setExecutor(new StatsBotCommand(timeManager));
+        getCommand("tokens").setExecutor(new TokensCommand(timeManager));
+        getCommand("mytimer").setExecutor(new TimerCommand(timeManager));
 
         // Каждые 30 секунд сохраняем время в БД
         getServer().getScheduler().runTaskTimer(this, () -> {
@@ -30,13 +32,15 @@ public class TimeWatcher extends JavaPlugin {
             });
         }, 20L * 30, 20L * 30);
 
-        // Каждые 30 минут +0.25 токена
+        // Каждую минуту проверяем токены индивидуально
         getServer().getScheduler().runTaskTimer(this, () -> {
             getServer().getOnlinePlayers().forEach(p -> {
-                timeManager.addTokens(p, 0.25);
-                p.sendMessage("§a+0.25 §7токена за игру на сервере!");
+                if (timeManager.shouldGetToken(p)) {
+                    timeManager.addTokens(p, 0.25);
+                    p.sendMessage("§a+0.25 §7токена за игру на сервере!");
+                }
             });
-        }, 20L * 60 * 30, 20L * 60 * 30);
+        }, 20L * 60, 20L * 60);
 
         getLogger().info("TimeWatcher включён!");
     }
